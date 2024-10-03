@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Startmin - Bootstrap Admin Theme</title>
+        <title><?= $title ?></title>
 
         <!-- Bootstrap Core CSS -->
         <link href="<?= base_url() ?>template/backend/css/bootstrap.min.css" rel="stylesheet">
@@ -39,13 +39,21 @@
                             <h3 class="panel-title">Please Sign In</h3>
                         </div>
                         <div class="panel-body">
-                            <form role="form">
+                            <?php 
+                            echo form_open('login');
+                            if($this->session->flashdata('pesan')){
+                                echo '<div class="alert alert-success alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+                                echo $this->session->flashdata('pesan');
+                                echo' </div>';
+                            }
+                            ?>
                                 <fieldset>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                        <input class="form-control" placeholder="Username" name="username" type="text" autofocus required>
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                        <input class="form-control" placeholder="Password" name="password" type="password" requireds>
                                     </div>
                                     <div class="checkbox">
                                         <label>
@@ -53,9 +61,12 @@
                                         </label>
                                     </div>
                                     <!-- Change this to a button or input when using this as a form -->
-                                    <a href="index.html" class="btn btn-lg btn-success btn-block">Login</a>
+                                    <div class="col-sm-12 text-center">
+                                        <button class="btn btn-success" type="submit">Login</button>
+                                        <a href="<?= base_url() ?>" class="btn btn-primary">Back to web</a>
+                                    </div>
                                 </fieldset>
-                            </form>
+                            <? echo form_close(); ?>
                         </div>
                     </div>
                 </div>
